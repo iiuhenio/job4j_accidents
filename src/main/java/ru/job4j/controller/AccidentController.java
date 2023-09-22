@@ -16,23 +16,27 @@ import ru.job4j.service.AccidentService;
 public class AccidentController {
     private final AccidentService accidents;
 
-    @GetMapping("/createAccident")
+    @GetMapping("/accidents/createAccident")
     public String viewCreateAccident() {
-        return "createAccident";
+
+        return "accidents/createAccident";
     }
 
     @PostMapping("/saveAccident")
     public String save(@ModelAttribute Accident accident) {
         accidents.create(accident);
-        return "redirect:/index";
+        return "redirect:/";
     }
-    @PostMapping("/editAccident")
-    public String edit(@ModelAttribute Accident accident, Model model) {
-            var isUpdated = accidents.update(accident);
-            if (!isUpdated) {
-                model.addAttribute("message", "Инцидент с указанным идентификатором не найдено");
-                return "errors/404";
-            }
-            return "redirect:/index";
+
+    @GetMapping("/formUpdateAccident")
+    public String update(@RequestParam("id") int id, Model model) {
+        model.addAttribute("accident", accidents.findById(id).get());
+        return "accidents/editAccident";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute Accident accident, Model model) {
+        var isUpdated = accidents.update(accident);
+        return "redirect:/";
     }
 }
