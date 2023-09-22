@@ -16,4 +16,6 @@ public interface AccidentService {
     Optional<Accident> findById(int id);
 
     Collection<Accident> findAll();
+
+    Accident create(Accident accident);
 }

@@ -26,7 +26,6 @@ public class AccidentController {
         accidents.create(accident);
         return "redirect:/index";
     }
-
     @PostMapping("/editAccident")
     public String edit(@ModelAttribute Accident accident, Model model) {
             var isUpdated = accidents.update(accident);

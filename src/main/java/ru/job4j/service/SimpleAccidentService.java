@@ -48,4 +48,10 @@ public class SimpleAccidentService implements AccidentService {
     public Collection<Accident> findAll() {
         return accidentMem.findAll();
     }
+
+    @Override
+    public Accident create(Accident accident) {
+        return accidentMem.save(accident);
+
+    }
 }
