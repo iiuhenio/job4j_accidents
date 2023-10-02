@@ -16,7 +16,7 @@ import ru.job4j.service.AccidentService;
 public class AccidentController {
     private final AccidentService accidents;
 
-    @GetMapping("/accidents/createAccident")
+    @GetMapping("/addAccident")
     public String viewCreateAccident() {
 
         return "accidents/createAccident";

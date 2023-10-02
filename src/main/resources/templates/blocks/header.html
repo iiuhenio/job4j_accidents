@@ -4,10 +4,10 @@
             <a class="navbar-brand" href="/">Job4jAccidents</a>
             <div class="collapse navbar-collapse">
                 <div class="navbar-nav  me-auto">
-                    <a class="nav-item nav-link" href="/">Главная</a>
+                    <a class="nav-item nav-link active" th:href="@{/index}">Главная</a>
                     <a class="nav-item nav-link active" th:href="@{/accidents}">ДТП</a>
                     <a class="nav-item nav-link active" th:href="@{/cars}">Машины</a>
-                    <a class="nav-item nav-link active" th:href="@{/accidents/createAccident}">Создать инцидент</a>
+                    <a class="nav-item nav-link active" th:href="@{/addAccident}">Создать инцидент</a>
                     <a class="nav-item nav-link active" th:href="@{/accidents/editAccident}">Редактировать инцидент</a>
                     <a class="nav-item nav-link active" th:text="${user}">Имя пользователя</a>
                 </div>
