@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import ru.job4j.model.Accident;
+import ru.job4j.model.AccidentType;
 import ru.job4j.service.AccidentService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -17,7 +21,12 @@ public class AccidentController {
     private final AccidentService accidents;
 
     @GetMapping("/addAccident")
-    public String viewCreateAccident() {
+    public String viewCreateAccident(Model model) {
+        List<AccidentType> types = new ArrayList<>();
+        types.add(new AccidentType(1, "Две машины"));
+        types.add(new AccidentType(2, "Машина и человек"));
+        types.add(new AccidentType(3, "Машина и велосипед"));
+        model.addAttribute("types", types);
 
         return "accidents/createAccident";
     }

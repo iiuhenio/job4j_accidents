@@ -2,6 +2,7 @@ package ru.job4j.repository;
 
 import org.springframework.stereotype.Repository;
 import ru.job4j.model.Accident;
+import ru.job4j.model.AccidentType;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collection;
@@ -19,9 +20,10 @@ public class MemoryAccidentMem implements AccidentMem {
     private final Map<Integer, Accident> accidents = new HashMap<>();
 
     private MemoryAccidentMem() {
-        save(new Accident(1, "Name1", "Text1", "Address1"));
-        save(new Accident(2, "Name2", "Text2", "Address2"));
-        save(new Accident(3, "Name3", "Text3", "Address3"));
+        AccidentType accidentType = new AccidentType(1, "Две машины");
+        save(new Accident(1, "Name1", "Text1", "Address1", accidentType));
+        save(new Accident(2, "Name2", "Text2", "Address2", accidentType));
+        save(new Accident(3, "Name3", "Text3", "Address3", accidentType));
     }
 
     @Override
@@ -42,7 +44,8 @@ public class MemoryAccidentMem implements AccidentMem {
                 -> new Accident(oldAccident.getId(),
                 accident.getName(),
                 accident.getText(),
-                accident.getAddress()))
+                accident.getAddress(),
+                accident.getType()))
                 != null;
     }
 
