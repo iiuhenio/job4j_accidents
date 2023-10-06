@@ -30,6 +30,11 @@ public class AccidentController {
 
     @GetMapping("/formUpdateAccident")
     public String update(@RequestParam("id") int id, Model model) {
+        var accidentOptional = accidents.findById(id);
+        if (accidentOptional.isEmpty()) {
+            model.addAttribute("message", "Ошибка обновления инцидента");
+            return "errors/404";
+        }
         model.addAttribute("accident", accidents.findById(id).get());
         return "accidents/editAccident";
     }
@@ -37,6 +42,10 @@ public class AccidentController {
     @PostMapping("/update")
     public String update(@ModelAttribute Accident accident, Model model) {
         var isUpdated = accidents.update(accident);
+        if (!isUpdated) {
+            model.addAttribute("message", "Ошибка обновления инцидента");
+            return "errors/404";
+        }
         return "redirect:/";
     }
 }
