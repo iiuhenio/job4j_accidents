@@ -46,7 +46,7 @@
                     <div class="form-group">
                         <label for="type.id">Тип</label>
                         <select class="form-control" id="type.id" name="type.id">
-                            <option th:each="type: ${Accidenttypes}"
+                            <option th:each="type: ${types}"
                                     th:text="${type.name}"
                                     th:value="${type.id}"></option>
                         </select>

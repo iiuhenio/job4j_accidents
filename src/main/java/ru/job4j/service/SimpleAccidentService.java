@@ -3,6 +3,7 @@ package ru.job4j.service;
 import org.springframework.stereotype.Service;
 import ru.job4j.model.Accident;
 import ru.job4j.repository.AccidentMem;
+import ru.job4j.repository.AccidentTypeRepository;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -11,10 +12,10 @@ import java.util.Optional;
 public class SimpleAccidentService implements AccidentService {
 
     private final AccidentMem accidentMem;
-
-
-    public SimpleAccidentService(AccidentMem accidentMem) {
+    private final AccidentTypeRepository accidentTypeRepository;
+    public SimpleAccidentService(AccidentMem accidentMem, AccidentTypeRepository accidentTypeRepository) {
         this.accidentMem = accidentMem;
+        this.accidentTypeRepository = accidentTypeRepository;
     }
 
     @Override
@@ -35,6 +36,7 @@ public class SimpleAccidentService implements AccidentService {
 
     @Override
     public boolean update(Accident accident) {
+        accident.setType(accidentTypeRepository.findById(accident.getType().getId()).get());
         var isUpdated = accidentMem.update(accident);
         return isUpdated;
     }

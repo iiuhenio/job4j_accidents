@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.job4j.model.Accident;
 import ru.job4j.model.AccidentType;
 import ru.job4j.service.AccidentService;
+import ru.job4j.service.AccidentTypeService;
 
 import java.util.ArrayList;
 import java.util.List;
