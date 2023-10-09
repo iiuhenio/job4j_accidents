@@ -44,7 +44,7 @@ public class AccidentController {
             model.addAttribute("message", "Ошибка обновления инцидента");
             return "errors/404";
         }
-        model.addAttribute("accident", accidents.findById(id).get());
+        model.addAttribute("accident", accidentOptional.get());
         return "accidents/editAccident";
     }
 
