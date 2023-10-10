@@ -19,8 +19,9 @@ public class SimpleAccidentService implements AccidentService {
     }
 
     @Override
-    public Accident save(Accident accident) {
-        return accidentMem.save(accident);
+    public Optional<Accident> save(Accident accident, int typeId) {
+        accident.setType(accidentTypeRepository.findById(typeId).get());
+        return Optional.of(accidentMem.save(accident));
     }
 
 

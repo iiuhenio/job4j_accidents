@@ -22,12 +22,8 @@ public class AccidentController {
     private final AccidentService accidents;
 
     @GetMapping("/addAccident")
-    public String viewCreateAccident(Model model) {
-        List<AccidentType> types = new ArrayList<>();
-        types.add(new AccidentType(1, "Две машины"));
-        types.add(new AccidentType(2, "Машина и человек"));
-        types.add(new AccidentType(3, "Машина и велосипед"));
-        model.addAttribute("types", types);
+    public String viewCreateAccident(Model model, AccidentTypeService types) {
+        model.addAttribute("types", types.findAll());
 
         return "accidents/createAccident";
     }
@@ -39,13 +35,14 @@ public class AccidentController {
     }
 
     @GetMapping("/formUpdateAccident")
-    public String update(@RequestParam("id") int id, Model model) {
+    public String update(@RequestParam("id") int id, Model model, AccidentTypeService types) {
         var accidentOptional = accidents.findById(id);
         if (accidentOptional.isEmpty()) {
             model.addAttribute("message", "Ошибка обновления инцидента");
             return "errors/404";
         }
         model.addAttribute("accident", accidentOptional.get());
+        model.addAttribute("types", types.findAll());
         return "accidents/editAccident";
     }
 
