@@ -1,7 +1,9 @@
 package ru.job4j.controller;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,13 +18,15 @@ import ru.job4j.service.AccidentTypeService;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 @Controller
 @AllArgsConstructor
 public class AccidentController {
     private final AccidentService accidents;
+    private final AccidentTypeService types;
 
     @GetMapping("/addAccident")
-    public String viewCreateAccident(Model model, AccidentTypeService types) {
+    public String viewCreateAccident(Model model) {
         model.addAttribute("types", types.findAll());
 
         return "accidents/createAccident";
@@ -35,7 +39,7 @@ public class AccidentController {
     }
 
     @GetMapping("/formUpdateAccident")
-    public String update(@RequestParam("id") int id, Model model, AccidentTypeService types) {
+    public String update(@RequestParam("id") int id, Model model) {
         var accidentOptional = accidents.findById(id);
         if (accidentOptional.isEmpty()) {
             model.addAttribute("message", "Ошибка обновления инцидента");
