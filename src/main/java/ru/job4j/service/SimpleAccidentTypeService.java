@@ -1,11 +1,13 @@
 package ru.job4j.service;
 
+import org.springframework.stereotype.Service;
 import ru.job4j.model.AccidentType;
 import ru.job4j.repository.AccidentTypeRepository;
 
 import java.util.Collection;
 import java.util.Optional;
 
+@Service
 public class SimpleAccidentTypeService implements AccidentTypeService {
 
     private final AccidentTypeRepository accidentTypeRepository;

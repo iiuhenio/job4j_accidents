@@ -18,7 +18,7 @@ import ru.job4j.service.AccidentTypeService;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+
 @Controller
 @AllArgsConstructor
 public class AccidentController {
