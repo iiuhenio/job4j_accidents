@@ -19,6 +19,12 @@ public class MemoryAccidentTypeRepository implements AccidentTypeRepository {
 
     private final Map<Integer, AccidentType> accidentTypes = new HashMap<>();
 
+    public MemoryAccidentTypeRepository() {
+        accidentTypes.put(1, new AccidentType(1, "Две Машины"));
+        accidentTypes.put(2, new AccidentType(2, "Машина и человек"));
+        accidentTypes.put(3, new AccidentType(3, "Машина и велосипед"));
+    }
+
     @Override
     public AccidentType save(AccidentType accidentType) {
         accidentType.setId(nextId.getAndIncrement());
