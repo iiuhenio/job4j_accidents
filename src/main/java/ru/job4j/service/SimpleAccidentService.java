@@ -2,21 +2,28 @@ package ru.job4j.service;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.model.Accident;
+import ru.job4j.model.AccidentRule;
 import ru.job4j.model.AccidentType;
 import ru.job4j.repository.AccidentMem;
+import ru.job4j.repository.AccidentRuleRepository;
 import ru.job4j.repository.AccidentTypeRepository;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class SimpleAccidentService implements AccidentService {
 
     private final AccidentMem accidentMem;
     private final AccidentTypeRepository accidentTypeRepository;
-    public SimpleAccidentService(AccidentMem accidentMem, AccidentTypeRepository accidentTypeRepository) {
+    private final AccidentRuleRepository accidentRuleRepository;
+
+    public SimpleAccidentService(AccidentMem accidentMem, AccidentTypeRepository accidentTypeRepository, AccidentRuleRepository accidentRuleRepository) {
         this.accidentMem = accidentMem;
         this.accidentTypeRepository = accidentTypeRepository;
+        this.accidentRuleRepository = accidentRuleRepository;
     }
 
     @Override
@@ -41,6 +48,7 @@ public class SimpleAccidentService implements AccidentService {
         Optional<AccidentType> accidentType = accidentTypeRepository.findById(accident.getType().getId());
         accident.setType(accidentType.get());
         return accidentMem.update(accident);
+
     }
 
     @Override

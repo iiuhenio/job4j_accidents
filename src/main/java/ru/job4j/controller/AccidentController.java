@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import ru.job4j.model.Accident;
 import ru.job4j.model.AccidentType;
+import ru.job4j.service.AccidentRuleService;
 import ru.job4j.service.AccidentService;
 import ru.job4j.service.AccidentTypeService;
 
+import javax.servlet.http.HttpServletRequest;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +28,12 @@ import java.util.List;
 public class AccidentController {
     private final AccidentService accidents;
     private final AccidentTypeService types;
+    private final AccidentRuleService rules;
 
     @GetMapping("/addAccident")
     public String viewCreateAccident(Model model) {
         model.addAttribute("types", types.findAll());
+        model.addAttribute("rules", rules.findAll());
 
         return "accidents/createAccident";
     }
@@ -47,6 +53,7 @@ public class AccidentController {
         }
         model.addAttribute("accident", accidentOptional.get());
         model.addAttribute("types", types.findAll());
+        model.addAttribute("rules", rules.findAll());
         return "accidents/editAccident";
     }
 

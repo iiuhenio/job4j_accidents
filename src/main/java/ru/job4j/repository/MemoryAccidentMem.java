@@ -21,9 +21,9 @@ public class MemoryAccidentMem implements AccidentMem {
 
     private MemoryAccidentMem() {
         AccidentType accidentType = new AccidentType(1, "Две машины");
-        save(new Accident(1, "Name1", "Text1", "Address1", accidentType));
-        save(new Accident(2, "Name2", "Text2", "Address2", accidentType));
-        save(new Accident(3, "Name3", "Text3", "Address3", accidentType));
+        save(new Accident(1, "Name1", "Text1", "Address1", accidentType, null));
+        save(new Accident(2, "Name2", "Text2", "Address2", accidentType, null));
+        save(new Accident(3, "Name3", "Text3", "Address3", accidentType, null));
     }
 
     @Override
@@ -45,7 +45,8 @@ public class MemoryAccidentMem implements AccidentMem {
                 accident.getName(),
                 accident.getText(),
                 accident.getAddress(),
-                accident.getType()))
+                accident.getType(),
+                accident.getRules()))
                 != null;
     }
 
