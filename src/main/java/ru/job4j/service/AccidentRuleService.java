@@ -5,6 +5,7 @@ import ru.job4j.model.AccidentType;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
 
 public interface AccidentRuleService {
 
@@ -16,4 +17,6 @@ public interface AccidentRuleService {
     Optional<AccidentRule> findById(int id);
 
     Collection<AccidentRule> findAll();
+
+    Set<AccidentRule> getByIds(Set<Integer> ids);
 }

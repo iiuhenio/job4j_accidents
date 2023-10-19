@@ -1,5 +1,6 @@
 package ru.job4j.service;
 
+import org.apache.tomcat.util.digester.Rule;
 import org.springframework.stereotype.Service;
 import ru.job4j.model.Accident;
 import ru.job4j.model.AccidentRule;
@@ -44,9 +45,10 @@ public class SimpleAccidentService implements AccidentService {
     }
 
     @Override
-    public boolean update(Accident accident) {
+    public boolean update(Accident accident, Set<Integer> ruleIds) {
         Optional<AccidentType> accidentType = accidentTypeRepository.findById(accident.getType().getId());
         accident.setType(accidentType.get());
+        Set<AccidentRule> accidentRule = accidentRuleRepository.getByIds(ruleIds);
         return accidentMem.update(accident);
 
     }

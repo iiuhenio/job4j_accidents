@@ -4,6 +4,7 @@ import ru.job4j.model.Accident;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
 
 public interface AccidentService {
 
@@ -11,7 +12,7 @@ public interface AccidentService {
 
     boolean deleteById(int id);
 
-    boolean update(Accident accident);
+    boolean update(Accident accident, Set<Integer> ruleIds);
 
     Optional<Accident> findById(int id);
 

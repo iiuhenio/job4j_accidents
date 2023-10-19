@@ -6,6 +6,7 @@ import ru.job4j.repository.AccidentRuleRepository;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class SimpleAccidentRuleService implements AccidentRuleService {
@@ -39,5 +40,10 @@ public class SimpleAccidentRuleService implements AccidentRuleService {
     @Override
     public Collection<AccidentRule> findAll() {
         return accidentRuleRepository.findAll();
+    }
+
+    @Override
+    public Set<AccidentRule> getByIds(Set<Integer> ids) {
+        return accidentRuleRepository.getByIds(ids);
     }
 }

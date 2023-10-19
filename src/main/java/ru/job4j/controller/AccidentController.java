@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -39,9 +40,10 @@ public class AccidentController {
     }
 
     @PostMapping("/saveAccident")
-    public String save(@ModelAttribute Accident accident) {
+    public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
+        String[] ids = req.getParameterValues("rIds");
         accidents.create(accident);
-        return "redirect:/";
+        return "redirect:/index";
     }
 
     @GetMapping("/formUpdateAccident")
@@ -58,8 +60,9 @@ public class AccidentController {
     }
 
     @PostMapping("/update")
-    public String update(@ModelAttribute Accident accident, Model model) {
-        var isUpdated = accidents.update(accident);
+    public String update(@ModelAttribute Accident accident, Model model,
+                         @RequestParam(required = false) Set<Integer> rIds) {
+        var isUpdated = accidents.update(accident, rIds);
         if (!isUpdated) {
             model.addAttribute("message", "Ошибка обновления инцидента");
             return "errors/404";

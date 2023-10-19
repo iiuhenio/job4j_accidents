@@ -4,11 +4,9 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.model.AccidentRule;
 
 import javax.annotation.concurrent.ThreadSafe;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 @Repository
 @ThreadSafe
@@ -45,5 +43,12 @@ public class MemoryAccidentRuleRepository implements AccidentRuleRepository {
     @Override
     public Collection<AccidentRule> findAll() {
         return accidentRules.values();
+    }
+
+    @Override
+    public Set<AccidentRule> getByIds(Set<Integer> ids) {
+        return accidentRules.values().stream()
+                .filter(rule -> ids.contains(rule.getId()))
+                .collect(Collectors.toSet());
     }
 }
