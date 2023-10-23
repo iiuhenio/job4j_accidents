@@ -18,5 +18,5 @@ public interface AccidentService {
 
     Collection<Accident> findAll();
 
-    Accident create(Accident accident);
+    Accident create(Accident accident, Set<Integer> ruleIds);
 }

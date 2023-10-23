@@ -40,9 +40,9 @@ public class AccidentController {
     }
 
     @PostMapping("/saveAccident")
-    public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
-        String[] ids = req.getParameterValues("rIds");
-        accidents.create(accident);
+    public String save(@ModelAttribute Accident accident, HttpServletRequest req,
+                       @RequestParam(required = false) Set<Integer> ruleIds) {
+        accidents.create(accident, ruleIds);
         return "redirect:/index";
     }
 
