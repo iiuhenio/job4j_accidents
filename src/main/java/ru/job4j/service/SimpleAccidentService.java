@@ -70,6 +70,5 @@ public class SimpleAccidentService implements AccidentService {
         Set<AccidentRule> accidentRule = accidentRuleRepository.getByIds(ruleIds);
         accident.setRules(accidentRule);
         return accidentMem.save(accident);
-
     }
 }

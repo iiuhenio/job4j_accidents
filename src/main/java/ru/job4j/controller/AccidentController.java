@@ -41,8 +41,8 @@ public class AccidentController {
 
     @PostMapping("/saveAccident")
     public String save(@ModelAttribute Accident accident, HttpServletRequest req,
-                       @RequestParam(required = false) Set<Integer> ruleIds) {
-        accidents.create(accident, ruleIds);
+                       @RequestParam(required = false) Set<Integer> rIds) {
+        accidents.create(accident, rIds);
         return "redirect:/index";
     }
 
@@ -67,6 +67,6 @@ public class AccidentController {
             model.addAttribute("message", "Ошибка обновления инцидента");
             return "errors/404";
         }
-        return "redirect:/";
+        return "index";
     }
 }
