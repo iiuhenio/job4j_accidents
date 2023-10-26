@@ -36,6 +36,7 @@ public class MemoryAccidentMem implements AccidentMem {
 
     @Override
     public boolean deleteById(int id) {
+
         return accidents.remove(id) != null;
     }
 
