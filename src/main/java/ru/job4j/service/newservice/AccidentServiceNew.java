@@ -20,23 +20,17 @@ import java.util.Set;
 public class AccidentServiceNew {
 
     private final AccidentJdbcTemplate accidentsRepository;
-    private final RuleJdbcTemplate accidentTypeRepository;
-    private final TypeJdbcTemplate accidentRuleRepository;
+    private final RuleJdbcTemplate accidentRuleRepository;
+    private final TypeJdbcTemplate accidentTypeRepository;
 
     public void create(Accident accident) {
+
         accidentsRepository.save(accident);
     }
 
 
-    public Optional<Accident> save(Accident accident, int typeId) {
-        Optional<AccidentType> accidentType = accidentTypeRepository.findById(accident.getType().getId());
-        accident.setType(accidentType.get());
-        return Optional.ofNullable(accidentsRepository.save(accident));
-    }
-
-
-    public boolean deleteById(int id) {
-        var fileOptional = findById(id);
+    public boolean deleteById(int id, Accident accident) {
+        var fileOptional = findById(id, accident);
         if (fileOptional.isEmpty()) {
             return false;
         }
@@ -46,17 +40,12 @@ public class AccidentServiceNew {
 
 
     public boolean update(Accident accident, Set<Integer> ruleIds) {
-        Optional<AccidentRule> accidentType = accidentTypeRepository.findById(accident.getType().getId());
-        accident.setType(accidentType.get());
-        Set<AccidentRule> accidentRule = accidentRuleRepository.getByIds(ruleIds);
-        accident.setRules(accidentRule);
         return accidentsRepository.update(accident);
-
     }
 
 
-    public Optional<Accident> findById(int id) {
-        return accidentsRepository.findById(id);
+    public Optional<Accident> findById(int id, Accident accident) {
+        return accidentsRepository.findById(id, accident);
     }
 
 

@@ -34,19 +34,22 @@ public class AccidentJdbcTemplate {
     }
 
     public boolean deleteById(int id) {
-
-        return false;
+        jdbc.update("delete from accidents where id = ?", id);
+        return true;
     }
 
 
     public boolean update(Accident accident) {
-
-        return false;
+        jdbc.update("update accidents set name = ? where id = ?",
+                accident.getName(),
+                accident.getId());
+        return true;
     }
 
-    public Optional<Accident> findById(int id) {
-
-        return null;
+    public Optional<Accident> findById(int id, Accident accident) {
+        jdbc.update("DELETE * FROM accidents WHERE id = ?",
+                accident.getId());
+        return Optional.of(accident);
     }
 
 }
